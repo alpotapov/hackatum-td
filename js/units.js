@@ -23,7 +23,7 @@ function new_soldier(direction, owner){
 	owner = typeof owner !== 'undefined' ? owner : current_player;
 
 	var type = 'soldier';
-	var udamage = 20;
+	var udamage = 5;
 	var speed = 100;
 	var hp = 20;
 	
@@ -65,6 +65,55 @@ function new_soldier(direction, owner){
 
 	if(owner == current_player){
 		socket_send("new_soldier('"+direction+"', "+current_player+");");
+	}
+}
+
+function new_tank(direction, owner){
+	owner = typeof owner !== 'undefined' ? owner : current_player;
+
+	var type = 'tank';
+	var udamage = 10;
+	var speed = 60;
+	var hp = 40;
+	
+	var starting_point = new Array();
+	
+	if(direction == "ltr"){
+		starting_point[0] = walkingpath_ltr[0][0]*grid_size+grid_size/2;
+		starting_point[1] = walkingpath_ltr[0][1]*grid_size+grid_size/2;
+	}else{
+		starting_point[0] = walkingpath_rtl[0][0]*grid_size+grid_size/2;
+		starting_point[1] = walkingpath_rtl[0][1]*grid_size+grid_size/2;
+	}
+
+	/*
+	var figure = new Kinetic.RegularPolygon({
+		x: starting_point[0],
+		y: starting_point[1],
+		sides: 6,
+		radius: grid_size/2,
+		fill: 'red',
+		stroke: 'black',
+		strokeWidth: 1
+	*/
+	var imgsoldier = new Image(40, 40);
+	var rnd = 1 + Math.floor(Math.random() * 3);
+	imgsoldier.src = "res/tanktank" + rnd + ".png";
+	console.log(imgsoldier.src);
+	var figure = new Kinetic.Rect({
+		x: starting_point[0],
+		y: starting_point[1],
+		width: 40,
+		height: 40,
+		fillPatternImage: imgsoldier
+	});
+
+	bf_units.add(figure);
+
+	var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
+
+	if(owner == current_player){
+		socket_send("new_tank('"+direction+"', "+current_player+");");
 	}
 }
 
