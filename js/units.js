@@ -41,20 +41,19 @@ function new_soldier(direction, owner){
 	var rnd = 1 + Math.floor(Math.random() * 3);
 	imgsoldier.src = "res/tank" + rnd + ".png";
 	console.log(imgsoldier.src);
-	var figure = new Kinetic.Rect({
-		x: starting_point[0],
-		y: starting_point[1],
-		width: 40,
-		height: 40,
-		fillPatternImage: imgsoldier
-	});
-
-	bf_units.add(figure);
-
-	var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
-
-	if(owner == current_player){
-		socket_send("new_soldier('"+direction+"', "+current_player+");");
+	imgsoldier.onload = function() {
+		var figure = new Kinetic.Rect({
+			x: starting_point[0],
+			y: starting_point[1],
+			width: 40,
+			height: 40,
+			fillPatternImage: imgsoldier
+		});
+		bf_units.add(figure);		
+		var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
+		if(owner == current_player){
+			socket_send("new_soldier('"+direction+"', "+current_player+");");
+		}
 	}
 }
 
@@ -80,20 +79,19 @@ function new_tank(direction, owner){
 	var rnd = 1 + Math.floor(Math.random() * 3);
 	imgsoldier.src = "res/tanktank" + rnd + ".png";
 	console.log(imgsoldier.src);
-	var figure = new Kinetic.Rect({
-		x: starting_point[0],
-		y: starting_point[1],
-		width: 40,
-		height: 40,
-		fillPatternImage: imgsoldier
-	});
-
-	bf_units.add(figure);
-
-	var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
-
-	if(owner == current_player){
-		socket_send("new_tank('"+direction+"', "+current_player+");");
+	imgsoldier.onload = function() {
+		var figure = new Kinetic.Rect({
+			x: starting_point[0],
+			y: starting_point[1],
+			width: 40,
+			height: 40,
+			fillPatternImage: imgsoldier
+		});
+		bf_units.add(figure);		
+		var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
+		if(owner == current_player){
+			socket_send("new_tank('"+direction+"', "+current_player+");");
+		}
 	}
 }
 
