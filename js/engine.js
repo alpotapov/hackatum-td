@@ -7,18 +7,34 @@ var walkingpath = init_walkingpath();
 //global vars
 var stage;
 var bf_background;
+var bf_highlights;
 
 function init_game(){
+	bf_background = new Kinetic.Layer();
+	bf_highlights = new Kinetic.Layer();
+	
 	stage = new Kinetic.Stage({
 		container: 'battlefield',
 		width: stage_width,
 		height: stage_height
 	});
+	
+	$('#battlefield').on('click', function(evt) {
+		var pos = get_cursor(evt);
+		highlight(pos);
+	});
 
-	bf_background = new Kinetic.Layer();
 	init_grid(bf_background);
 	init_street(bf_background);
+	init_castles();
 
+	// add the layer to the stage
+	stage.add(bf_background);
+	stage.add(bf_highlights);
+	
+}
+
+function init_castles() {
 	var castle_1 = new Kinetic.Rect({
 		x: grid_size*1,
 		y: grid_size*4,
@@ -39,63 +55,10 @@ function init_game(){
 		stroke: 'black',
 		strokeWidth: 1
 	});
-
 	bf_background.add(castle_2);
-
-	// add the layer to the stage
-	stage.add(bf_background);
 }
-
-
-function test_animation(){
-	test_layer = new Kinetic.Layer();
-
-	var test_soldier = new Kinetic.RegularPolygon({
-		x: walkingpath[0][0]*grid_size+grid_size/2,
-		y: walkingpath[0][1]*grid_size+grid_size/2,
-		sides: 6,
-		radius: grid_size,
-		fill: 'red',
-		stroke: 'black',
-		strokeWidth: 1
-	});
-
-	test_layer.add(test_soldier);
-	stage.add(test_layer)
-/*
-	point1 = 
-	var anim = new Kinetic.Animation(function(frame) {
-    var velocity = 200;
-    var dist = velocity * (frame.timeDiff / 1000);
-    if(object.getX() >= walkingpath[1][0]){
-    	object.setX(walkingpath[1][0]);
-    	this.stop();
-    }else{
-    	object.move(dist, 0);
-    }
-	}, layer);
-
-	anim.start();
-
-	var anim = new Kinetic.Animation(function(frame) {
-		var time = frame.time,
-	        timeDiff = frame.timeDiff,
-	        frameRate = frame.frameRate;
-
-	    // update stuff
-	  }, layer);
-
-	  anim.start();
-*/
-}
-
 
 function init_grid(layer){
-	$('#battlefield').on('click', function(evt){
-		pos = get_cursor(evt);
-		//what to do?
-	});
-
 	counter_horizontal = stage_width/grid_size;
 	counter_vertical = stage_height/grid_size;
 
@@ -130,7 +93,6 @@ function init_grid(layer){
 	}
 }
 
-
 function init_street(layer){
 	points = new Array();
 	walkingpath.forEach(function(entry) {
@@ -151,7 +113,6 @@ function init_street(layer){
 	layer.add(street);
 }
 
-
 function init_walkingpath(){
 	var wp = new Array();
 	wp[0] = new Array(3, 6);
@@ -164,13 +125,31 @@ function init_walkingpath(){
 	return wp;
 }
 
-
 function get_cursor(e){
 	var $div = $("#battlefield");
 	divPos = {
-		left: e.pageX - $div.offset().left,
-		top: e.pageY - $div.offset().top
+		x: e.pageX - $div.offset().left,
+		y: e.pageY - $div.offset().top
 	};
 
 	return divPos;
+}
+
+function highlight(pos) {
+	var gridX = Math.floor(pos.x / grid_size);
+	var gridY = Math.floor(pos.y / grid_size);
+	
+	var highlight = new Kinetic.Rect({
+		x: grid_size*gridX,
+		y: grid_size*gridY,
+		width: grid_size,
+		height: grid_size,
+		fill: 'red',
+		stroke: 'black',
+		strokeWidth: 1
+	});
+	
+	bf_highlights.removeChildren();
+	bf_highlights.add(highlight);
+	bf_highlights.draw();
 }
