@@ -63,8 +63,8 @@ function new_mg_tower(xcor, ycor, owner){
 	ycor++;
 
 	var type = 'mg';
-	var damage = 5;
-	var cooldown = 1;
+	var damage = 10;
+	var cooldown = 0.5;
 	var radius = 5;
 
 	var img = new Image(40, 40);
@@ -93,7 +93,7 @@ function new_cannon_tower(xcor, ycor, owner){
 	ycor++;
 
 	var type = 'cannon';
-	var damage = 4;
+	var damage = 10;
 	var cooldown = 2;
 	var radius = 3.5;
 
@@ -123,8 +123,8 @@ function new_moerser_tower(xcor, ycor, owner){
 	ycor++;
 
 	var type = 'moerser';
-	var damage = 9;
-	var cooldown = 10;
+	var damage = 20;
+	var cooldown = 5;
 	var radius = 7;
 
 	var img = new Image(40, 40);
@@ -153,8 +153,8 @@ function new_rocket_tower(xcor, ycor, owner){
 	ycor++;
 
 	var type = 'rocket';
-	var damage = 12;
-	var cooldown = 40;
+	var damage = 40;
+	var cooldown = 7;
 	var radius = 9;
 
 	var img = new Image(40, 40);
