@@ -21,9 +21,14 @@ function init_game(){
 	
 	$('#battlefield').on('click', function(evt) {
 		var pos = get_cursor(evt);
-		highlight(pos);
+		highlight(pos, true);
 	});
-
+	
+	$('#battlefield').on('mousemove', function(evt) {
+		var pos = get_cursor(evt);
+		highlight(pos, false);
+	});
+	
 	init_grid(bf_background);
 	init_street(bf_background);
 	init_castles();
@@ -135,21 +140,55 @@ function get_cursor(e){
 	return divPos;
 }
 
-function highlight(pos) {
-	var gridX = Math.floor(pos.x / grid_size);
-	var gridY = Math.floor(pos.y / grid_size);
-	
-	var highlight = new Kinetic.Rect({
-		x: grid_size*gridX,
-		y: grid_size*gridY,
-		width: grid_size,
-		height: grid_size,
-		fill: 'red',
-		stroke: 'black',
-		strokeWidth: 1
-	});
-	
-	bf_highlights.removeChildren();
-	bf_highlights.add(highlight);
+
+var click_highlight = new Kinetic.Rect({
+	x: 0,
+	y: 0,
+	width: grid_size,
+	height: grid_size,
+	fill: 'rgb(122, 122, 122)',
+	opacity: 0.3,
+});
+
+var click_outline = new Kinetic.Rect({
+	x: 0,
+	y: 0,
+	width: grid_size - 2,
+	height: grid_size - 2,
+	stroke: 'black',
+	strokeWidth: 3
+});
+
+var o_highlight = new Kinetic.Rect({
+	x: 0,
+	y: 0,
+	width: grid_size,
+	height: grid_size,
+	fill: 'rgb(122, 122, 122)',
+	opacity: 0.3,
+	stroke: 'black',
+	strokeWidth: 1
+});
+
+function highlight(pos, click) {
+	var gridX = Math.floor(pos.x / grid_size) * grid_size;
+	var gridY = Math.floor(pos.y / grid_size) * grid_size;
+
+	o_highlight.remove();
+	if(click) {
+		click_highlight.remove();
+		click_outline.remove();
+		click_highlight.setX(gridX);
+		click_highlight.setY(gridY);
+		click_outline.setX(gridX + 1);
+		click_outline.setY(gridY + 1);
+		
+		bf_highlights.add(click_highlight);
+		bf_highlights.add(click_outline);
+	} else {
+		o_highlight.setX(gridX);
+		o_highlight.setY(gridY);
+		bf_highlights.add(o_highlight);
+	}
 	bf_highlights.draw();
 }
