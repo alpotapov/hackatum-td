@@ -42,9 +42,9 @@ function init_game(){
 function init_castles() {
 	var castle_1 = new Kinetic.Rect({
 		x: grid_size*1,
-		y: grid_size*4,
+		y: grid_size*5,
 		width: grid_size*2,
-		height: grid_size*4,
+		height: grid_size*3,
 		fill: 'blue',
 		stroke: 'black',
 		strokeWidth: 1
@@ -53,9 +53,9 @@ function init_castles() {
 
 	var castle_2 = new Kinetic.Rect({
 		x: grid_size*22,
-		y: grid_size*4,
+		y: grid_size*5,
 		width: grid_size*2,
-		height: grid_size*4,
+		height: grid_size*3,
 		fill: 'green',
 		stroke: 'black',
 		strokeWidth: 1
