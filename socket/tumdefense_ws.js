@@ -42,8 +42,8 @@ function connected_client(rid, request) {
 			*/
 
 			connected.forEach(function (entry) {
-				if(entry.rid != rid && connected[rid].state == 'online'){
-					entry.connection.sendUTF(message);
+				if(entry.id != rid && connected[rid].state == 'online'){
+					entry.connection.sendUTF(message.utf8Data);
 				}
 			});
 		}

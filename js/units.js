@@ -21,7 +21,9 @@ function new_unit(p_speed, p_udamage, p_object, p_hp, direction, owner, p_type){
 	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner);
 }
 
-function new_soldier(direction){
+function new_soldier(direction, owner){
+	owner = typeof owner !== 'undefined' ? owner : current_player;
+	
 	var type = 'soldier';
 	var udamage = 20;
 	var speed = 100;
@@ -61,6 +63,7 @@ function new_soldier(direction){
 	bf_units.add(figure);
 
 	var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
+	socket_send("new_soldier("+direction+", "+current_player+");");
 }
 
 

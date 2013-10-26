@@ -47,11 +47,11 @@ function new_tower(damage, cooldown, radius, figure, xcor, ycor, owner){
 
 	bf_towers.add(rad);
 	bf_towers.draw();
-
-	socket_send("new_tower("+damage+", "+cooldown+", "+radius+", "+figure+", "+xcor+", "+ycor+", "+owner+");");
 }
 
-function new_mg_tower(xcor, ycor){
+function new_mg_tower(xcor, ycor, owner){
+	owner = typeof owner !== 'undefined' ? owner : current_player;
+
 	xcor++;
 	ycor++;
 
@@ -74,6 +74,8 @@ function new_mg_tower(xcor, ycor){
 	bf_towers.draw();
 
 	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
+
+	socket_send("new_mg_tower("+xcor+", "+ycor+", "+current_player+");");
 }
 
 
