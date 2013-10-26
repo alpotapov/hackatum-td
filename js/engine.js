@@ -1,6 +1,7 @@
 // engine.js
 var stage_width = 1000;
 var stage_height = 600;
+var grid_size = 40;
 
 function init_game(){
 	var stage = new Kinetic.Stage({
@@ -30,8 +31,8 @@ function init_game(){
 }
 
 function init_grid(layer){
-	counter_horizontal = stage_width/10;
-	counter_vertical = stage_height/10;
+	counter_horizontal = stage_width/grid_size;
+	counter_vertical = stage_height/grid_size;
 
 	console.log(counter_vertical);
 	console.log(counter_horizontal);
@@ -39,7 +40,7 @@ function init_grid(layer){
 	counter = 0;
 	while (counter < counter_vertical){
 		var line = new Kinetic.Line({
-			points: [0, counter*10, stage_width, counter*10],
+			points: [0, counter*grid_size, stage_width, counter*grid_size],
 			stroke: 'black',
 			strokeWidth: 1
 		});
@@ -52,7 +53,7 @@ function init_grid(layer){
 	counter = 0;
 	while (counter < counter_horizontal){
 		var line = new Kinetic.Line({
-			points: [counter*10, 0, counter*10, stage_height],
+			points: [counter*grid_size, 0, counter*grid_size, stage_height],
 			stroke: 'black',
 			strokeWidth: 1
 		});
