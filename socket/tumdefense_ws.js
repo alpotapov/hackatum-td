@@ -91,6 +91,7 @@ wsServer.on('request', function (request) {
 	}
 	*/
 
+	console.log('tried to connect...');
 	connected[id_runner] = new connected_client(id_runner, request);
 	id_runner++;
 });

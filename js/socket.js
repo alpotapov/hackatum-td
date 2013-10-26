@@ -23,11 +23,13 @@ function init_socket(){
 }
 
 function socket_send(msg){
+	log_this(msg);
 	socket.send(msg);
 }
 
 
 function parse_msg(msg){
+	log_this(msg);
 	eval(msg);
 }
 
