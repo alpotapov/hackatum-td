@@ -24,7 +24,7 @@ var server = http.createServer(function (request, response) {
 function connected_client(rid, request) {
 	this.id = rid;
 	this.state = 'online';
-	this.connection = request.accept(client_type, request.origin);
+	this.connection = request.accept(request.origin);
 
 	log_this('New connected client, IP: '+this.connection.remoteAddress);
 
