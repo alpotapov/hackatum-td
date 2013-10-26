@@ -42,5 +42,5 @@ function account_subtract(player, change){
 }
 
 function update_cash(){
-  
+  $('#money_box').html(account_get(current_player));
 }

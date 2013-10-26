@@ -43,21 +43,27 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="row">
-				<div class="col-md-6">
-					<div id="towers">
+				<div class="col-md-5 menu_box">
+	
 						<div class="header">Towers</div>
 						<a class="tower" onclick="call_new_cannon_tower();"><img src="res/tower1.png"></a>
 						<a class="tower" onclick="call_new_mg_tower();"><img src="res/tower2.png"></a>
 						<a class="tower" onclick="call_new_moerser_tower();"><img src="res/tower3.png"></a>
 						<a class="tower" onclick="call_new_rocket_tower();"><img src="res/tower4.png"></a>
-					</div>
+
 				</div>
-				<div class="col-md-6">
-					<div id="units">
-						<Units class="header">Units</div>
-						<a class="unit" onclick="call_new_soldier();"><img src="res/tower1.png"></a>
-						<a class="unit" onclick="call_new_tank();"><img src="res/tower2.png"></a>
-					</div>
+				<div class="col-md-4 menu_box">
+	
+						<div class="header">Units</div>
+						<a class="unit" onclick="call_new_soldier();"><img src="res/spawn1.png"></a>
+						<a class="unit" onclick="call_new_tank();"><img src="res/spawn2.png"></a>
+	
+				</div>
+				<div class="col-md-3 menu_box">
+	
+						<div class="header">Stats</div>
+						<span>Your money: <span id="money_box"></span></span><br />
+						<span>Your health: <span id="health_box"></span></span>
 				</div>
 			</div>
 		</div>

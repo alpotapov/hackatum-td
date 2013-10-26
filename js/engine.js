@@ -301,3 +301,8 @@ function change_health(base, change) {
 	if(base == 2) health_2 -= change;
 	console.log("base: " + base + "; change: " + change);
 }
+
+
+function update_health(){
+	eval("$('#health_box').html(health_"+current_player+");");
+}
