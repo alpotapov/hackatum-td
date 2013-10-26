@@ -71,7 +71,7 @@ server.listen(8993, function () {
 //please do not change this unless u know what u are doing ~cvp
 wsServer = new WebSocketServer({
 	httpServer: server,
-	autoAcceptConnections: false,
+	autoAcceptConnections: true,
 	disableNagleAlgorithm: false
 });
 
@@ -94,18 +94,3 @@ wsServer.on('request', function (request) {
 	connected[id_runner] = new connected_client(id_runner, request);
 	id_runner++;
 });
-
-
-
-
-//make the consol input usable
-process.stdin.resume();
-process.stdin.setEncoding('utf8');
-
-process.stdin.on('data', function (chunk) {
-	if(chunk.charAt(0) == '/'){
-		eval(chunk.substr(1));
-	}
-});
-
-//console.log(connected);
