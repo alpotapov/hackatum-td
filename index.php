@@ -15,14 +15,17 @@
 	<script type="text/javascript" src="js/towers.js"></script>
 	<script type="text/javascript" src="js/units.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript" src="js/socket.js"></script>
 	<script type="text/javascript">
 		<?php
 		if($_GET['player'] == 1){
 			echo 'var current_player = 1;';
 			echo 'var enemy_player = 2;';
-		} else {
+		} elseif($_GET['player'] == 2) {
 			echo 'var current_player = 1;';
 			echo 'var enemy_player = 2;';
+		} else {
+			exit('U noob?');
 		}
 		?>
 	</script>
