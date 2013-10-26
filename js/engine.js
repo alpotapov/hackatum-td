@@ -51,7 +51,7 @@ function init_game(){
 }
 
 function init_colors() {
-	var img_1 = Image(500, 480);
+	var img_1 = new Image(500, 480);
 	img_1.src = "res/heart.png";
 	var half_1_pic = new Kinetic.Rect({
 		x: 0,
@@ -263,6 +263,18 @@ function highlight(pos, click) {
 
 function call_new_mg_tower(){
   new_mg_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
+}
+
+function call_new_cannon_tower(){
+	new_cannon_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
+}
+
+function call_new_moerser_tower(){
+	new_moerser_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
+}
+
+function call_new_rocket_tower(){
+	new_rocket_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
 }
 
 function change_health(base, change) {
