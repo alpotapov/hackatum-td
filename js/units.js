@@ -27,6 +27,14 @@ function new_soldier(direction, owner){
 	var speed = 100;
 	var hp = 20;
 	
+	var cost = 20;
+	if(!account_subtract(owner, cost)){
+  	console.log("not enough CASH!");
+  	return;
+	}
+	
+	console.log("funds available: " + account_get(owner));
+	
 	var starting_point = new Array();
 	
 	if(direction == "ltr"){
