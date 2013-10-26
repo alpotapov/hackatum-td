@@ -44,8 +44,8 @@ function move_through_points(speed, figure, point, layer, current, hp){
 			var done = {x: false, y: false};
 
 			//console.log(point[current]);
-			var new_hp = is_in_range(figure.getX(), figure.getY(), hp);
-			if(new_hp <= 0){
+			hp = is_in_range(figure.getX(), figure.getY(), hp);
+			if(hp <= 0){
 				console.log("Unit killed!");
 				this.stop();
 				figure.remove();
@@ -82,7 +82,7 @@ function move_through_points(speed, figure, point, layer, current, hp){
 
 			if(done.x == true && done.y == true){
 				this.stop();
-				move_through_points(speed, figure, point, layer, (current + 1), new_hp);
+				move_through_points(speed, figure, point, layer, (current + 1), hp);
 			}
 		}, layer);
 
