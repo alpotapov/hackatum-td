@@ -27,6 +27,10 @@
 		} else {
 			exit('U noob?');
 		}
+
+		if($_GET['socket'] == 1){
+			echo '$(document).ready(function(){ init_game(); });';
+		}
 		?>
 	</script>
 </head>
