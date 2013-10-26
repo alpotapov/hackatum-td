@@ -12,12 +12,13 @@ function init_game(){
 
 	var bf_background = new Kinetic.Layer();
 	init_grid(bf_background);
+	init_street(bf_background);
 
 	var castle_1 = new Kinetic.Rect({
 		x: grid_size*1,
-		y: grid_size*6,
+		y: grid_size*4,
 		width: grid_size*2,
-		height: grid_size*3,
+		height: grid_size*4,
 		fill: 'blue',
 		stroke: 'black',
 		strokeWidth: 1
@@ -26,9 +27,9 @@ function init_game(){
 
 	var castle_2 = new Kinetic.Rect({
 		x: grid_size*22,
-		y: grid_size*6,
+		y: grid_size*4,
 		width: grid_size*2,
-		height: grid_size*3,
+		height: grid_size*4,
 		fill: 'green',
 		stroke: 'black',
 		strokeWidth: 1
@@ -73,3 +74,12 @@ function init_grid(layer){
 		counter++;
 	}
 }
+
+function init_street(layer){
+	
+}
+
+
+
+
+
