@@ -7,7 +7,9 @@ var walkingpath = init_walkingpath();
 //global vars
 var stage;
 var bf_background;
+var bf_towers;
 var bf_units;
+
 
 function init_game(){
 	stage = new Kinetic.Stage({
@@ -17,6 +19,7 @@ function init_game(){
 	});
 
 	bf_background = new Kinetic.Layer();
+	bf_towers = new Kinetic.Layer();
 	bf_units = new Kinetic.Layer();
 	init_grid(bf_background);
 	init_street(bf_background);
@@ -46,6 +49,7 @@ function init_game(){
 
 	// add the layer to the stage
 	stage.add(bf_background);
+	stage.add(bf_towers);
 	stage.add(bf_units);
 }
 
