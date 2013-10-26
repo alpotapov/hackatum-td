@@ -28,7 +28,7 @@
 			exit('U noob?');
 		}
 
-		if(if(isset($_GET['socket']) && $_GET['socket'] == 1){
+		if(isset($_GET['socket']) && $_GET['socket'] == 1){
 			echo '$(document).ready(function(){ init_socket(); });';
 		}
 		?>
