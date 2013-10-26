@@ -5,13 +5,16 @@
 	margin: 10px auto;
 }
 
+#ui_container{
+  margin: 10px auto;
+  width: 500px;
+}
+
 #towers {
-  /* display: none; */
   height: 80px;
   width: 202px;
   border: 2px solid #000000;
   background-color: yellow;
-  margin: 10px auto;
 }
 
 #towers .header {

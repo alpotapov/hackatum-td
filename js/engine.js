@@ -30,7 +30,7 @@ function init_game(){
 	
 	$('#battlefield').on('mousemove', function(evt) {
 		var pos = get_cursor(evt);
-		highlight(pos, false);
+		//highlight(pos, false);
 	});
 
 	init_grid(bf_background);
