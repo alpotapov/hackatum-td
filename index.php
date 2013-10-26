@@ -5,18 +5,20 @@
 	<title>TUMdefense</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- vendor css -->
-	<link rel="stylesheet" media="screen" href="css/vendor/bootstrap.min.css">
 	<!-- custom css -->
 	<link rel="stylesheet" href="css/main.css">
 	<!-- vendor js -->
 	<script type="text/javascript" src="js/vendor/jquery_min.js"></script>
 	<script type="text/javascript" src="js/vendor/kinetic_min.js"></script>
-	<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
 	<!-- custom js -->
 	<script type="text/javascript" src="js/engine.js"></script>
 	<script type="text/javascript" src="js/towers.js"></script>
 	<script type="text/javascript" src="js/units.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript">
+		var current_player = 1;
+		var enemy_player = 2;
+	</script>
 </head>
 <body>
 	<div id="battlefield">

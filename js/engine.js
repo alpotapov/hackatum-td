@@ -55,8 +55,6 @@ function init_castles() {
 		height: grid_size*3,
 		fillPatternImage: c1_img,
 		// fill: 'blue',
-		stroke: 'black',
-		strokeWidth: 1
 	});
 	bf_background.add(castle_1);
 
@@ -70,8 +68,6 @@ function init_castles() {
 		height: grid_size*3,
 		fillPatternImage: c2_img,
 		//fill: 'green',
-		stroke: 'black',
-		strokeWidth: 1
 	});
 	bf_background.add(castle_2);
 }
@@ -81,33 +77,45 @@ function init_grid(layer){
 	counter_horizontal = stage_width/grid_size;
 	counter_vertical = stage_height/grid_size;
 
-	console.log(counter_vertical);
-	console.log(counter_horizontal);
-
-	counter = 0;
-	while (counter <= counter_vertical){
-		var line = new Kinetic.Line({
-			points: [0, counter*grid_size, stage_width, counter*grid_size],
-			stroke: 'black',
-			strokeWidth: 1,
-			alpha: 0.1
-		});
-
-		layer.add(line);
-
+	var counter = 0;
+	var inner = 0;
+	while (counter <= counter_horizontal) {
+		while(inner <= stage_height / 100) {
+			var rnd = 1 + Math.floor(Math.random() * 3);
+			var img = new Image(4, 100);
+			img.src = "res/line" + rnd + "_v.png";
+			var rect = new Kinetic.Rect({
+				x: counter * grid_size - 2,
+				y: inner * 100,
+				width: 4,
+				height: 100,
+				fillPatternImage: img
+			});
+			bf_background.add(rect);
+			inner++;
+		}
+		inner = 0;
 		counter++;
 	}
 
 	counter = 0;
-	while (counter <= counter_horizontal){
-		var line = new Kinetic.Line({
-			points: [counter*grid_size, 0, counter*grid_size, stage_height],
-			stroke: 'black',
-			strokeWidth: 1
-		});
-
-		layer.add(line);
-
+	inner = 0;
+	while (counter <= counter_vertical) {
+		while(inner <= stage_width / 100) {
+			var rnd = 1 + Math.floor(Math.random() * 3);
+			var img = new Image(100, 4);
+			img.src = "res/line" + rnd + "_h.png";
+			var rect = new Kinetic.Rect({
+				x: inner * 100,
+				y: counter * grid_size - 2,
+				width: 100,
+				height: 4,
+				fillPatternImage: img
+			});
+			bf_background.add(rect);
+			inner++;
+		}
+		inner = 0;
 		counter++;
 	}
 }
@@ -124,7 +132,7 @@ function init_street(layer){
 
 	var street = new Kinetic.Line({
 		points: points,
-		stroke: 'brown',
+		stroke: 'rgb(180, 20, 20)',
 		strokeWidth: grid_size,
 		lineJoin: 'round',
 		lineCap: 'square'

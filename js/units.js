@@ -2,25 +2,25 @@
 var unit_walkingpath_ltr = get_unit_walkingpath("ltr");
 var unit_walkingpath_rtl = get_unit_walkingpath("rtl");
 
-function new_unit(p_speed, p_damage, p_object, p_hp, direction){
-	var speed = p_speed;
-	var damage = p_damage;
-	var figure = p_object;
-	var hp = p_hp;
-	
-	console.log(direction);
+function new_unit(p_speed, p_udamage, p_object, p_hp, direction, owner){
+	this.speed = p_speed;
+	this.udamage = p_udamage;
+	this.figure = p_object;
+	this.hp = p_hp;
+	this.owner = owner;
+
 	if(direction == "ltr"){
     var walkingpath = unit_walkingpath_ltr;
   }else{
     var walkingpath = unit_walkingpath_rtl;
   }
-  console.log(walkingpath);
-	move_through_points(speed, figure, walkingpath, bf_units, 0, hp);
+
+	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner);
 }
 
 function new_soldier(direction){
 	var type = 'soldier';
-	var damage = 20;
+	var udamage = 20;
 	var speed = 100;
 	var hp = 20;
 	
@@ -46,11 +46,11 @@ function new_soldier(direction){
 
 	bf_units.add(figure);
 
-	var unit = new_unit(speed, damage, figure, hp, direction);
+	var unit = new_unit(speed, udamage, figure, hp, direction, current_player);
 }
 
 
-function move_through_points(speed, figure, point, layer, current, hp){
+function move_through_points(speed, figure, point, layer, current, hp, owner){
 		if(point.length <= current){
 			//console.log("movement done");
 			return;
@@ -60,8 +60,7 @@ function move_through_points(speed, figure, point, layer, current, hp){
 			var velocity = speed;
 			var dist = velocity * (frame.timeDiff / 1000);
 			var done = {x: false, y: false};
-			
-			hp = is_in_range(figure.getX(), figure.getY(), hp);
+			hp = is_in_range(figure.getX(), figure.getY(), hp, owner);
 			if(hp <= 0){
 				console.log("Unit killed!");
 				this.stop();
@@ -99,7 +98,7 @@ function move_through_points(speed, figure, point, layer, current, hp){
 
 			if(done.x == true && done.y == true){
 				this.stop();
-				move_through_points(speed, figure, point, layer, (current + 1), hp);
+				move_through_points(speed, figure, point, layer, (current + 1), hp, owner);
 			}
 		}, layer);
 
