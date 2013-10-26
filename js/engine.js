@@ -208,5 +208,5 @@ function highlight(pos, click) {
 }
 
 function call_new_mg_tower(){
-  create_mg_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
+  new_mg_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
 }
