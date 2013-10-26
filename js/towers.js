@@ -60,13 +60,14 @@ function new_mg_tower(xcor, ycor){
 	var cooldown = 1;
 	var radius = 5;
 
-	var figure = new Kinetic.Circle({
-		x: xcor * grid_size - grid_size/2,
-		y: ycor * grid_size - grid_size/2,
-		radius: grid_size/2,
-		fill: 'green',
-		stroke: 'black',
-		strokeWidth: 1
+	var img = new Image(40, 40);
+	img.src = "res/tower2.png";
+	var figure = new Kinetic.Rect({
+		x: (xcor - 1) * grid_size,
+		y: (ycor - 1) * grid_size,
+		fillPatternImage: img,
+		width: 40,
+		height: 40,
 	});
 
 	bf_towers.add(figure);

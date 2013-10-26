@@ -37,6 +37,7 @@ function new_soldier(direction){
   	starting_point[1] = walkingpath_rtl[0][1]*grid_size+grid_size/2;
 	}
 
+	/*
 	var figure = new Kinetic.RegularPolygon({
 		x: starting_point[0],
 		y: starting_point[1],
@@ -45,6 +46,16 @@ function new_soldier(direction){
 		fill: 'red',
 		stroke: 'black',
 		strokeWidth: 1
+	*/
+	var img = new Image(40, 40);
+	var rnd = 1 + Math.floor(Math.random() * 3);
+	img.src = "res/tank" + rnd + ".png";
+	var figure = new Kinetic.Rect({
+		x: walkingpath[0][0]*grid_size,
+		y: walkingpath[0][1]*grid_size,
+		width: 40,
+		height: 40,
+		fillPatternImage: img
 	});
 
 	bf_units.add(figure);
