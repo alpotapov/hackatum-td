@@ -71,15 +71,12 @@ function new_soldier(direction, owner){
 
 function move_through_points(speed, figure, point, layer, current, hp, owner, udamage){
 		var attack_castle = false;
-		if(point.length == current + 1){
+		console.log(point.length + " : " + current);
+		if(point.length == current){
 			attack_castle = true;
 		}
 		
-		if(point.length <= current){
-			return;
-		}
-		
-		if(point.length <= current){
+		if(point.length < current){
 			//console.log("movement done");
 			return;
 		}
