@@ -2,7 +2,8 @@
 var stage_width = 1000;
 var stage_height = 480;
 var grid_size = 40;
-var walkingpath = init_walkingpath();
+var walkingpath_ltr = init_walkingpath("ltr");
+var walkingpath_rtl = init_walkingpath("rtl");
 
 //global vars
 var stage;
@@ -122,7 +123,7 @@ function init_grid(layer){
 
 function init_street(layer){
 	points = new Array();
-	walkingpath.forEach(function(entry) {
+	walkingpath_ltr.forEach(function(entry) {
 		points.push(entry[0]*(grid_size)+20)
 		points.push(entry[1]*(grid_size)+20)
 	});
@@ -140,14 +141,23 @@ function init_street(layer){
 	layer.add(street);
 }
 
-function init_walkingpath(){
+function init_walkingpath(direction){
 	var wp = new Array();
-	wp[0] = new Array(3, 6);
-	wp[1] = new Array(wp[0][0]+3, wp[0][1]);
-	wp[2] = new Array(wp[1][0], wp[1][1]-3);
-	wp[3] = new Array(wp[2][0]+12, wp[2][1]);
-	wp[4] = new Array(wp[3][0], wp[3][1]+3);
-	wp[5] = new Array(wp[4][0]+3, wp[4][1]);
+	if(direction == "ltr"){
+  	wp[0] = new Array(3, 6);
+  	wp[1] = new Array(wp[0][0]+3, wp[0][1]);
+  	wp[2] = new Array(wp[1][0], wp[1][1]-3);
+  	wp[3] = new Array(wp[2][0]+12, wp[2][1]);
+  	wp[4] = new Array(wp[3][0], wp[3][1]+3);
+  	wp[5] = new Array(wp[4][0]+3, wp[4][1]);
+  }else{
+    wp[0] = new Array(21, 6);
+    wp[1] = new Array(wp[0][0]-3, wp[0][1]);
+    wp[2] = new Array(wp[1][0], wp[1][1]-3);
+    wp[3] = new Array(wp[2][0]-12, wp[2][1]);
+    wp[4] = new Array(wp[3][0], wp[3][1]+3);
+    wp[5] = new Array(wp[4][0]-3, wp[4][1]);
+  }
 
 	return wp;
 }

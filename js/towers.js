@@ -2,14 +2,18 @@
 var tower_list = new Array();
 var tower_list_enemy = new Array();
 
-
 function new_tower(damage, cooldown, radius, figure, xcor, ycor, owner){
+	occupied = false;
 	tower_list.forEach(function(entry){
 		if(entry.xc == xcor && entry.yc == ycor){
 			alert('This place is taken!');
-			return;
+			occupied = true;
 		}
 	});
+	
+	if(occupied){
+		return;
+	}
 	
 	this.damage = damage;
 	this.cooldown = cooldown * 1000;
@@ -18,6 +22,7 @@ function new_tower(damage, cooldown, radius, figure, xcor, ycor, owner){
 	this.last_fired = 0;
 	this.xc = xcor;
 	this.yc = ycor;
+
 	this.owner = owner;
 
 	//console.log(damage);

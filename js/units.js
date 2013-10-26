@@ -1,7 +1,8 @@
 // unit
-var unit_walkingpath = get_unit_walkingpath();
+var unit_walkingpath_ltr = get_unit_walkingpath("ltr");
+var unit_walkingpath_rtl = get_unit_walkingpath("rtl");
 
-function new_unit(p_speed, p_udamage, p_object, p_hp, owner, p_type){
+function new_unit(p_speed, p_udamage, p_object, p_hp, direction, owner, p_type){
 	this.speed = p_speed;
 	this.udamage = p_udamage;
 	this.figure = p_object;
@@ -9,20 +10,36 @@ function new_unit(p_speed, p_udamage, p_object, p_hp, owner, p_type){
 	this.owner = owner;
 	this.utype = p_type;
 
-	socket_send("new_unit("+p_speed+", "+p_udamage+", "+p_object+", "+p_hp+", "+owner+", "+p_type+");");
+	socket_send("new_unit("+p_speed+", "+p_udamage+", "+p_object+", "+p_hp+", "+direction+", "+owner+", "+p_type+");");
 
-	move_through_points(speed, figure, unit_walkingpath, bf_units, 0, hp, owner);
+	if(direction == "ltr"){
+		var walkingpath = unit_walkingpath_ltr;
+	}else{
+		var walkingpath = unit_walkingpath_rtl;
+	}
+
+	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner);
 }
 
-function new_soldier(){
+function new_soldier(direction){
 	var type = 'soldier';
 	var udamage = 20;
 	var speed = 100;
 	var hp = 20;
+	
+	var starting_point = new Array();
+	
+	if(direction == "ltr"){
+  	starting_point[0] = walkingpath_ltr[0][0]*grid_size+grid_size/2;
+  	starting_point[1] = walkingpath_ltr[0][1]*grid_size+grid_size/2;
+	}else{
+  	starting_point[0] = walkingpath_rtl[0][0]*grid_size+grid_size/2;
+  	starting_point[1] = walkingpath_rtl[0][1]*grid_size+grid_size/2;
+	}
 
 	var figure = new Kinetic.RegularPolygon({
-		x: walkingpath[0][0]*grid_size+grid_size/2,
-		y: walkingpath[0][1]*grid_size+grid_size/2,
+		x: starting_point[0],
+		y: starting_point[1],
 		sides: 6,
 		radius: grid_size/2,
 		fill: 'red',
@@ -32,7 +49,7 @@ function new_soldier(){
 
 	bf_units.add(figure);
 
-	var unit = new_unit(speed, udamage, figure, hp, current_player, type);
+	var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
 }
 
 
@@ -46,8 +63,6 @@ function move_through_points(speed, figure, point, layer, current, hp, owner){
 			var velocity = speed;
 			var dist = velocity * (frame.timeDiff / 1000);
 			var done = {x: false, y: false};
-
-			//console.log(point[current]);
 			hp = is_in_range(figure.getX(), figure.getY(), hp, owner);
 			if(hp <= 0){
 				console.log("Unit killed!");
@@ -93,9 +108,15 @@ function move_through_points(speed, figure, point, layer, current, hp, owner){
 		anim.start();
 }
 
-function get_unit_walkingpath(){
+function get_unit_walkingpath(direction){
 	var ret = new Array();
-
+  
+  if(direction == "ltr"){
+    var walkingpath = walkingpath_ltr;
+  }else{
+    var walkingpath = walkingpath_rtl;
+  }
+  
 	walkingpath.forEach(function(entry) {
 		ret.push(new Array(entry[0]*(grid_size)+20, entry[1]*(grid_size)+20))
 	});
