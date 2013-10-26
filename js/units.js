@@ -37,16 +37,6 @@ function new_soldier(direction, owner){
 		starting_point[1] = walkingpath_rtl[0][1]*grid_size+grid_size/2;
 	}
 
-	/*
-	var figure = new Kinetic.RegularPolygon({
-		x: starting_point[0],
-		y: starting_point[1],
-		sides: 6,
-		radius: grid_size/2,
-		fill: 'red',
-		stroke: 'black',
-		strokeWidth: 1
-	*/
 	var imgsoldier = new Image(40, 40);
 	var rnd = 1 + Math.floor(Math.random() * 3);
 	imgsoldier.src = "res/tank" + rnd + ".png";
@@ -86,16 +76,6 @@ function new_tank(direction, owner){
 		starting_point[1] = walkingpath_rtl[0][1]*grid_size+grid_size/2;
 	}
 
-	/*
-	var figure = new Kinetic.RegularPolygon({
-		x: starting_point[0],
-		y: starting_point[1],
-		sides: 6,
-		radius: grid_size/2,
-		fill: 'red',
-		stroke: 'black',
-		strokeWidth: 1
-	*/
 	var imgsoldier = new Image(40, 40);
 	var rnd = 1 + Math.floor(Math.random() * 3);
 	imgsoldier.src = "res/tanktank" + rnd + ".png";
@@ -153,6 +133,7 @@ function move_through_points(speed, figure, point, layer, current, hp, owner, ud
 				this.stop();
 				figure.remove();
 				bf_units.draw();
+				return;
 			}
 
 			var dist_diff = {x: point[current][0] - figure.getX(), y: point[current][1] - figure.getY()};
