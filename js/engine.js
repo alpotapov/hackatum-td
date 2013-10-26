@@ -5,12 +5,16 @@ var grid_size = 40;
 var walkingpath_ltr = init_walkingpath("ltr");
 var walkingpath_rtl = init_walkingpath("rtl");
 
+var health_1 = 100;
+var health_2 = 100;
+
 //global vars
 var stage;
 var bf_background;
 var bf_towers;
 var bf_units;
 var bf_highlights;
+
 
 function init_game(){
 	stage = new Kinetic.Stage({
@@ -34,6 +38,7 @@ function init_game(){
 		highlight(pos, false);
 	});
 
+	init_colors();
 	init_grid(bf_background);
 	init_street(bf_background);
 	init_castles();
@@ -43,6 +48,38 @@ function init_game(){
 	stage.add(bf_towers);
 	stage.add(bf_units);
 	stage.add(bf_highlights);
+}
+
+function init_colors() {
+	var img_1 = Image(500, 480);
+	img_1.src = "res/heart.png";
+	var half_1_pic = new Kinetic.Rect({
+		x: 0,
+		y: 0,
+		width: stage_width / 2,
+		height: stage_height,
+		fillPatternImage: img_1,
+	});
+	var half_1 = new Kinetic.Rect({
+		x: 0,
+		y: 0,
+		width: stage_width / 2,
+		height: stage_height,
+		fillPatternImage: img_1,
+		fill: 'rgb(255, 120, 120)',
+		opacity: 0.2,
+	});
+	bf_background.add(half_1);
+	bf_background.add(half_1_pic);
+	
+	var half_2 = new Kinetic.Rect({
+		x: stage_width / 2,
+		y: 0,
+		width: stage_width / 2,
+		height: stage_height,
+		fill: 'rgb(200, 200, 255)',
+	});
+	bf_background.add(half_2);	
 }
 
 function init_castles() {
@@ -72,7 +109,6 @@ function init_castles() {
 	bf_background.add(castle_2);
 }
 
-
 function init_grid(layer){
 	counter_horizontal = stage_width/grid_size;
 	counter_vertical = stage_height/grid_size;
@@ -89,7 +125,7 @@ function init_grid(layer){
 				y: inner * 100,
 				width: 4,
 				height: 100,
-				fillPatternImage: img
+				fillPatternImage: img,
 			});
 			bf_background.add(rect);
 			inner++;
@@ -227,4 +263,9 @@ function highlight(pos, click) {
 
 function call_new_mg_tower(){
   new_mg_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
+}
+
+function change_health(base, change) {
+	if(base == 1) health_1 += change;
+	if(base == 2) health_2 += change;
 }
