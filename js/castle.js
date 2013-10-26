@@ -22,4 +22,6 @@ function health_subtract(base, change) {
 	  }
   }
 	console.log("base: " + base + "; change: " + change);
+
+	update_health();
 }
