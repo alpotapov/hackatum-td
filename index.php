@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="js/vendor/kinetic_min.js"></script>
 	<!-- custom -->
 	<script type="text/javascript" src="js/engine.js"></script>
+	<script type="text/javascript" src="js/units.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 </head>
 <body>
