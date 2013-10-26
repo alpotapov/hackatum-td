@@ -1,14 +1,15 @@
 // unit
 var unit_walkingpath = get_unit_walkingpath();
 
-function new_unit(p_speed, p_udamage, p_object, p_hp, owner){
+function new_unit(p_speed, p_udamage, p_object, p_hp, owner, p_type){
 	this.speed = p_speed;
 	this.udamage = p_udamage;
 	this.figure = p_object;
 	this.hp = p_hp;
 	this.owner = owner;
+	this.utype = p_type;
 
-	console.log(hp);
+	socket_send("new_unit("+p_speed+", "+p_udamage+", "+p_object+", "+p_hp+", "+owner+", "+p_type+");");
 
 	move_through_points(speed, figure, unit_walkingpath, bf_units, 0, hp, owner);
 }
@@ -31,7 +32,7 @@ function new_soldier(){
 
 	bf_units.add(figure);
 
-	var unit = new_unit(speed, udamage, figure, hp, current_player);
+	var unit = new_unit(speed, udamage, figure, hp, current_player, type);
 }
 
 

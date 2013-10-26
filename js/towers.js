@@ -42,6 +42,8 @@ function new_tower(damage, cooldown, radius, figure, xcor, ycor, owner){
 
 	bf_towers.add(rad);
 	bf_towers.draw();
+
+	socket_send("new_tower("+damage+", "+cooldown+", "+radius+", "+figure+", "+xcor+", "+ycor+", "+owner+");");
 }
 
 function new_mg_tower(xcor, ycor){
