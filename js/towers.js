@@ -75,7 +75,9 @@ function new_mg_tower(xcor, ycor, owner){
 
 	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
 
-	socket_send("new_mg_tower("+xcor+", "+ycor+", "+current_player+");");
+	if(owner == current_player){
+		socket_send("new_mg_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+	}
 }
 
 

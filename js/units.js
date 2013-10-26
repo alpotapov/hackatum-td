@@ -23,7 +23,7 @@ function new_unit(p_speed, p_udamage, p_object, p_hp, direction, owner, p_type){
 
 function new_soldier(direction, owner){
 	owner = typeof owner !== 'undefined' ? owner : current_player;
-	
+
 	var type = 'soldier';
 	var udamage = 20;
 	var speed = 100;
@@ -63,7 +63,10 @@ function new_soldier(direction, owner){
 	bf_units.add(figure);
 
 	var unit = new_unit(speed, udamage, figure, hp, direction, current_player, type);
-	socket_send("new_soldier("+direction+", "+current_player+");");
+
+	if(owner == current_player){
+		socket_send("new_soldier("+direction+", "+current_player+");");
+	}
 }
 
 

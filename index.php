@@ -22,8 +22,8 @@
 			echo 'var current_player = 1;';
 			echo 'var enemy_player = 2;';
 		} elseif($_GET['player'] == 2) {
-			echo 'var current_player = 1;';
-			echo 'var enemy_player = 2;';
+			echo 'var current_player = 2;';
+			echo 'var enemy_player = 1;';
 		} else {
 			exit('U noob?');
 		}
