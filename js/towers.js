@@ -15,9 +15,12 @@ function new_tower(damage, cooldown, radius, figure, xcor, ycor){
 }
 
 function new_mg_tower(xcor, ycor){
+	xcor++;
+	ycor++;
+
 	var type = 'mg';
 	var damage = 5;
-	var cooldown = 5;
+	var cooldown = 1;
 	var radius = 10;
 
 	var figure = new Kinetic.Circle({
@@ -50,9 +53,9 @@ function is_in_range(xcor, ycor, hp){
 		if(tmp_distance <= entry.radius){
 			var ts = new Date().getTime();
 
-			console.log((entry.last_fired - ts) + ", " + entry.cooldown)
+			//console.log((ts - entry.last_fired) + ", " + entry.cooldown)
 
-			if((entry.last_fired - ts) >= entry.cooldown){
+			if((ts - entry.last_fired) >= entry.cooldown){
 				//console.log(tower_list[tcounter].last_fired);
 				unit_hp = unit_hp - entry.damage;
 				tower_list[tcounter].last_fired = ts;
