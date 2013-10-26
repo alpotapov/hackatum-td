@@ -3,6 +3,12 @@ var tower_list = new Array();
 
 
 function new_tower(damage, cooldown, radius, figure, xcor, ycor){
+	tower_list.forEach(function(entry){
+  	if(entry.xc == xcor && entry.yc == ycor){
+    	return;
+  	}
+	});
+	
 	this.damage = damage;
 	this.cooldown = cooldown * 1000;
 	this.radius = radius  * grid_size;
