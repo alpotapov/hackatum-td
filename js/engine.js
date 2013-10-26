@@ -278,6 +278,7 @@ function call_new_rocket_tower(){
 }
 
 function change_health(base, change) {
-	if(base == 1) health_1 += change;
-	if(base == 2) health_2 += change;
+	if(base == 1) health_1 -= change;
+	if(base == 2) health_2 -= change;
+	console.log("base: " + base + "; change: " + change);
 }

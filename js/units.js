@@ -16,7 +16,7 @@ function new_unit(p_speed, p_udamage, p_object, p_hp, direction, owner, p_type){
 		var walkingpath = unit_walkingpath_rtl;
 	}
 
-	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner);
+	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner, udamage);
 }
 
 function new_soldier(direction, owner){
@@ -69,7 +69,16 @@ function new_soldier(direction, owner){
 }
 
 
-function move_through_points(speed, figure, point, layer, current, hp, owner){
+function move_through_points(speed, figure, point, layer, current, hp, owner, udamage){
+		var attack_castle = false;
+		if(point.length == current + 1){
+			attack_castle = true;
+		}
+		
+		if(point.length <= current){
+			return;
+		}
+		
 		if(point.length <= current){
 			//console.log("movement done");
 			return;
@@ -82,6 +91,19 @@ function move_through_points(speed, figure, point, layer, current, hp, owner){
 			hp = is_in_range(figure.getX(), figure.getY(), hp, owner);
 			if(hp <= 0){
 				console.log("Unit killed!");
+				this.stop();
+				figure.remove();
+				bf_units.draw();
+			}
+			
+			if(attack_castle){
+  			if(current_player == 1){
+    			var enemy_castle = 2;
+  			}else{
+    			var enemy_castle = 1;
+  			}
+  			change_health(enemy_castle, udamage) //1 for left, 2 for right, change - health delta
+  			console.log("Unit dealt damage to the enemy base!");
 				this.stop();
 				figure.remove();
 				bf_units.draw();
@@ -117,7 +139,7 @@ function move_through_points(speed, figure, point, layer, current, hp, owner){
 
 			if(done.x == true && done.y == true){
 				this.stop();
-				move_through_points(speed, figure, point, layer, (current + 1), hp, owner);
+				move_through_points(speed, figure, point, layer, (current + 1), hp, owner, udamage);
 			}
 		}, layer);
 
