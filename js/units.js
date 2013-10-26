@@ -96,6 +96,12 @@ function move_through_points(speed, figure, point, layer, current, hp, owner, ud
 			hp = is_in_range(figure.getX(), figure.getY(), hp, owner);
 			if(hp <= 0){
 				console.log("Unit killed!");
+				if(current_player == 1){
+  				var give_to = 2;
+				}else{
+  				var give_to = 1
+				}
+				account_add(give_to, 50);
 				this.stop();
 				figure.remove();
 				bf_units.draw();

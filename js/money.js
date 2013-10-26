@@ -15,6 +15,8 @@ function account_add(player, change){
   }else{
     account_p2 += change;
   }
+  
+  console.log("Player " + player + " gets " + change + "$");
 }
 
 function account_subtract(player, change){
