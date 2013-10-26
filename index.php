@@ -12,8 +12,9 @@
 	<script type="text/javascript" src="js/vendor/jquery_min.js"></script>
 	<script type="text/javascript" src="js/vendor/kinetic_min.js"></script>
 	<!-- custom js -->
-	<script type="text/javascript" src="js/engine.js"></script>
 	<script type="text/javascript" src="js/money.js"></script>
+	<script type="text/javascript" src="js/castle.js"></script>
+	<script type="text/javascript" src="js/engine.js"></script>
 	<script type="text/javascript" src="js/towers.js"></script>
 	<script type="text/javascript" src="js/units.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>

@@ -5,9 +5,6 @@ var grid_size = 40;
 var walkingpath_ltr = init_walkingpath("ltr");
 var walkingpath_rtl = init_walkingpath("rtl");
 
-var health_1 = 100;
-var health_2 = 100;
-
 //global vars
 var stage;
 var bf_background;
@@ -300,9 +297,19 @@ function change_health(base, change) {
 	if(base == 1) health_1 -= change;
 	if(base == 2) health_2 -= change;
 	console.log("base: " + base + "; change: " + change);
+	update_health();
 }
-
 
 function update_health(){
 	eval("$('#health_box').html(health_"+current_player+");");
+}
+
+function gameover_alert(player){
+  alert("Castle of Player " + player + " was DESTROYED!");
+  if(player == 1){
+    player = 2;
+  }else{
+    player = 1;
+  }
+  alert("PLAYER " + player + "WINS!");
 }

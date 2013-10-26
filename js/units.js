@@ -146,8 +146,12 @@ function move_through_points(speed, figure, point, layer, current, hp, owner, ud
   			}else{
     			var enemy_castle = 1;
   			}
-  			change_health(enemy_castle, udamage) //1 for left, 2 for right, change - health delta
-  			console.log("Unit dealt damage to the enemy base!");
+  			if(!health_subtract(enemy_castle, udamage)){
+    			console.log("Unit dealt damage to the enemy base!");
+  			}else{
+    			console.log("Unit DESTROYED ENEMY BASE!");
+    			gameover_alert(enemy_castle);
+  			}
 				this.stop();
 				figure.remove();
 				bf_units.draw();
