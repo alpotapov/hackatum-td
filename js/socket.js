@@ -7,7 +7,11 @@ var counter = 0;
 function init_socket(){
 	log_this("Trying to connect... ");
 
-	socket = new WebSocket("ws://"+server+":"+port+"/", []);
+	protocol_array = [];
+	protocol_array[0] = 'tumdefense';
+	protocol_array[1] = '1234';
+
+	socket = new WebSocket("ws://"+server+":"+port+"/", protocol_array);
 
 	socket.onopen = function(){
 		log_this("Connected");

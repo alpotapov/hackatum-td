@@ -24,7 +24,7 @@ var server = http.createServer(function (request, response) {
 function connected_client(rid, request) {
 	this.id = rid;
 	this.state = 'online';
-	this.connection = request.accept(request.origin);
+	this.connection = request.accept('tumdefense', request.origin);
 
 	log_this('New connected client, IP: '+this.connection.remoteAddress);
 
@@ -71,7 +71,7 @@ server.listen(8993, function () {
 //please do not change this unless u know what u are doing ~cvp
 wsServer = new WebSocketServer({
 	httpServer: server,
-	autoAcceptConnections: true,
+	autoAcceptConnections: false,
 	disableNagleAlgorithm: false
 });
 
