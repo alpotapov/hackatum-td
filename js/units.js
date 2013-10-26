@@ -18,7 +18,7 @@ function new_unit(p_speed, p_udamage, p_object, p_hp, direction, owner, p_type){
 		var walkingpath = unit_walkingpath_rtl;
 	}
 
-	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner);
+	move_through_points(speed, figure, walkingpath, bf_units, 0, hp, owner, udamage);
 }
 
 function new_soldier(direction){
@@ -51,8 +51,8 @@ function new_soldier(direction){
 	var rnd = 1 + Math.floor(Math.random() * 3);
 	img.src = "res/tank" + rnd + ".png";
 	var figure = new Kinetic.Rect({
-		x: walkingpath[0][0]*grid_size,
-		y: walkingpath[0][1]*grid_size,
+		x: starting_point[0]*grid_size,
+		y: starting_point[1]*grid_size,
 		width: 40,
 		height: 40,
 		fillPatternImage: img
@@ -64,9 +64,13 @@ function new_soldier(direction){
 }
 
 
-function move_through_points(speed, figure, point, layer, current, hp, owner){
+function move_through_points(speed, figure, point, layer, current, hp, owner, udamage){
+		
+		if(point.length == current + 1){
+			var attack_castle = true;
+		}
+		
 		if(point.length <= current){
-			//console.log("movement done");
 			return;
 		}
 	
@@ -81,7 +85,20 @@ function move_through_points(speed, figure, point, layer, current, hp, owner){
 				figure.remove();
 				bf_units.draw();
 			}
-
+			
+			if(attack_castle){
+  			if(current_player == 1){
+    			var enemy_castle = 2;
+  			}else{
+    			var enemy_castle = 1;
+  			}
+  			change_health(enemy_castle, udamage) //1 for left, 2 for right, change - health delta
+  			console.log("Unit dealt damage to the enemy base!");
+				this.stop();
+				figure.remove();
+				bf_units.draw();
+			}
+        
 			var dist_diff = {x: point[current][0] - figure.getX(), y: point[current][1] - figure.getY()};
 			
 			if(dist_diff.x < 0){
