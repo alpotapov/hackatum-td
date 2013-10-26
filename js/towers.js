@@ -69,22 +69,21 @@ function new_mg_tower(xcor, ycor, owner){
 
 	var img = new Image(40, 40);
 	img.src = "res/tower2.png";
-	var figure = new Kinetic.Rect({
-		x: (xcor - 1) * grid_size,
-		y: (ycor - 1) * grid_size,
-		fillPatternImage: img,
-		width: 40,
-		height: 40,
-	});
-
-	bf_towers.add(figure);
-	bf_towers.draw();
-
-	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
-
-	if(owner == current_player){
-		socket_send("new_mg_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
-	}
+	img.onload = function() {
+		var figure = new Kinetic.Rect({
+			x: (xcor - 1) * grid_size,
+			y: (ycor - 1) * grid_size,
+			fillPatternImage: img,
+			width: 40,
+			height: 40,
+		});
+		bf_towers.add(figure);		
+		bf_towers.draw();
+		var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
+		if(owner == current_player){
+			socket_send("new_mg_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+		}
+	};
 }
 
 function new_cannon_tower(xcor, ycor, owner){
@@ -100,21 +99,20 @@ function new_cannon_tower(xcor, ycor, owner){
 
 	var img = new Image(40, 40);
 	img.src = "res/tower1.png";
-	var figure = new Kinetic.Rect({
-		x: (xcor - 1) * grid_size,
-		y: (ycor - 1) * grid_size,
-		fillPatternImage: img,
-		width: 40,
-		height: 40,
-	});
-
-	bf_towers.add(figure);
-	bf_towers.draw();
-
-	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
-
-	if(owner == current_player){
-		socket_send("new_cannon_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+	img.onload = function() {
+		var figure = new Kinetic.Rect({
+			x: (xcor - 1) * grid_size,
+			y: (ycor - 1) * grid_size,
+			fillPatternImage: img,
+			width: 40,
+			height: 40,
+		});
+		bf_towers.add(figure);		
+		bf_towers.draw();
+		var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
+		if(owner == current_player){
+			socket_send("new_cannon_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+		}
 	}
 }
 
@@ -131,21 +129,20 @@ function new_moerser_tower(xcor, ycor, owner){
 
 	var img = new Image(40, 40);
 	img.src = "res/tower3.png";
-	var figure = new Kinetic.Rect({
-		x: (xcor - 1) * grid_size,
-		y: (ycor - 1) * grid_size,
-		fillPatternImage: img,
-		width: 40,
-		height: 40,
-	});
-
-	bf_towers.add(figure);
-	bf_towers.draw();
-
-	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
-
-	if(owner == current_player){
-		socket_send("new_moerser_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+	img.onload = function() {
+		var figure = new Kinetic.Rect({
+			x: (xcor - 1) * grid_size,
+			y: (ycor - 1) * grid_size,
+			fillPatternImage: img,
+			width: 40,
+			height: 40,
+		});
+		bf_towers.add(figure);			
+		bf_towers.draw();
+		var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
+		if(owner == current_player){
+			socket_send("new_moerser_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+		}
 	}
 }
 
@@ -162,21 +159,20 @@ function new_rocket_tower(xcor, ycor, owner){
 
 	var img = new Image(40, 40);
 	img.src = "res/tower4.png";
-	var figure = new Kinetic.Rect({
-		x: (xcor - 1) * grid_size,
-		y: (ycor - 1) * grid_size,
-		fillPatternImage: img,
-		width: 40,
-		height: 40,
-	});
-
-	bf_towers.add(figure);
-	bf_towers.draw();
-
-	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
-
-	if(owner == current_player){
-		socket_send("new_rocket_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+	img.onload = function() {
+		var figure = new Kinetic.Rect({
+			x: (xcor - 1) * grid_size,
+			y: (ycor - 1) * grid_size,
+			fillPatternImage: img,
+			width: 40,
+			height: 40,
+		});
+		bf_towers.add(figure);		
+		bf_towers.draw();
+		var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
+		if(owner == current_player){
+			socket_send("new_rocket_tower("+(xcor-1)+", "+(ycor-1)+", "+current_player+");");
+		}
 	}
 }
 
