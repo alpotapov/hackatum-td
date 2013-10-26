@@ -7,6 +7,7 @@ var walkingpath = init_walkingpath();
 //global vars
 var stage;
 var bf_background;
+var bf_units;
 
 function init_game(){
 	stage = new Kinetic.Stage({
@@ -16,6 +17,7 @@ function init_game(){
 	});
 
 	bf_background = new Kinetic.Layer();
+	bf_units = new Kinetic.Layer();
 	init_grid(bf_background);
 	init_street(bf_background);
 
@@ -44,49 +46,7 @@ function init_game(){
 
 	// add the layer to the stage
 	stage.add(bf_background);
-}
-
-
-function test_animation(){
-	test_layer = new Kinetic.Layer();
-
-	var test_soldier = new Kinetic.RegularPolygon({
-		x: walkingpath[0][0]*grid_size+grid_size/2,
-		y: walkingpath[0][1]*grid_size+grid_size/2,
-		sides: 6,
-		radius: grid_size,
-		fill: 'red',
-		stroke: 'black',
-		strokeWidth: 1
-	});
-
-	test_layer.add(test_soldier);
-	stage.add(test_layer)
-/*
-	point1 = 
-	var anim = new Kinetic.Animation(function(frame) {
-    var velocity = 200;
-    var dist = velocity * (frame.timeDiff / 1000);
-    if(object.getX() >= walkingpath[1][0]){
-    	object.setX(walkingpath[1][0]);
-    	this.stop();
-    }else{
-    	object.move(dist, 0);
-    }
-	}, layer);
-
-	anim.start();
-
-	var anim = new Kinetic.Animation(function(frame) {
-		var time = frame.time,
-	        timeDiff = frame.timeDiff,
-	        frameRate = frame.frameRate;
-
-	    // update stuff
-	  }, layer);
-
-	  anim.start();
-*/
+	stage.add(bf_units);
 }
 
 
