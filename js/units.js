@@ -1,19 +1,20 @@
 // unit
-unit_walkingpath = get_unit_walkingpath();
+var unit_walkingpath = get_unit_walkingpath();
 
-
-function new_unit(p_speed, p_damage, p_object){
+function new_unit(p_speed, p_damage, p_object, p_hp){
 	var speed = p_speed;
 	var damage = p_damage;
 	var figure = p_object;
+	var hp = p_hp;
 
-	move_through_points(speed, figure, unit_walkingpath, bf_units, 0);
+	move_through_points(speed, figure, unit_walkingpath, bf_units, 0, hp);
 }
 
 function new_soldier(){
 	var type = 'soldier';
 	var damage = 20;
 	var speed = 100;
+	var hp = 20;
 
 	var figure = new Kinetic.RegularPolygon({
 		x: walkingpath[0][0]*grid_size+grid_size/2,
@@ -27,11 +28,11 @@ function new_soldier(){
 
 	bf_units.add(figure);
 
-	var unit = new_unit(speed, damage, figure);
+	var unit = new_unit(speed, damage, figure, hp);
 }
 
 
-function move_through_points(speed, figure, point, layer, current){
+function move_through_points(speed, figure, point, layer, current, hp){
 		if(point.length <= current){
 			//console.log("movement done");
 			return;
@@ -43,6 +44,13 @@ function move_through_points(speed, figure, point, layer, current){
 			var done = {x: false, y: false};
 
 			//console.log(point[current]);
+			var new_hp = is_in_range(figure.getX(), figure.getY(), hp);
+			if(new_hp <= 0){
+				console.log("Unit killed!");
+				this.stop();
+				figure.remove();
+				bf_units.draw();
+			}
 
 			var dist_diff = {x: point[current][0] - figure.getX(), y: point[current][1] - figure.getY()};
 			
@@ -74,7 +82,7 @@ function move_through_points(speed, figure, point, layer, current){
 
 			if(done.x == true && done.y == true){
 				this.stop();
-				move_through_points(speed, figure, point, layer, (current + 1));
+				move_through_points(speed, figure, point, layer, (current + 1), new_hp);
 			}
 		}, layer);
 
