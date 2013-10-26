@@ -5,6 +5,7 @@
 	<title>TUMdefense</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- vendor css -->
+	<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
 	<!-- custom css -->
 	<link rel="stylesheet" href="css/main.css">
 	<!-- vendor js -->
@@ -37,16 +38,28 @@
 <body>
 	<div id="battlefield">
 	</div>
-  <div class="row">
-  	<div class="col-lg-10">
-  		<div id="towers">
-  			<div class="header">Towers</div>
-  			<a class="tower" onclick="call_new_cannon_tower();"><img src="res/tower1.png"></a>
-  			<a class="tower" onclick="call_new_mg_tower();"><img src="res/tower2.png"></a>
-  			<a class="tower" onclick="call_new_moerser_tower();"><img src="res/tower3.png"></a>
-  			<a class="tower" onclick="call_new_rocket_tower();"><img src="res/tower4.png"></a>
-  		</div>
-  	</div>
-  </div>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="row">
+				<div class="col-md-6">
+					<div id="towers">
+						<div class="header">Towers</div>
+						<a class="tower" onclick="call_new_cannon_tower();"><img src="res/tower1.png"></a>
+						<a class="tower" onclick="call_new_mg_tower();"><img src="res/tower2.png"></a>
+						<a class="tower" onclick="call_new_moerser_tower();"><img src="res/tower3.png"></a>
+						<a class="tower" onclick="call_new_rocket_tower();"><img src="res/tower4.png"></a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div id="units">
+						<Units class="header">Units</div>
+						<a class="unit" onclick="call_new_soldier();"><img src="res/tower1.png"></a>
+						<a class="unit" onclick="call_new_tank();"><img src="res/tower2.png"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

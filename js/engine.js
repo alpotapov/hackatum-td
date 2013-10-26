@@ -277,6 +277,25 @@ function call_new_rocket_tower(){
 	new_rocket_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
 }
 
+// units :D
+function call_new_soldier(){
+	if(current_player == 1){
+		var direction = 'ltr';
+	} else {
+		var direction = 'rtf';
+	}
+	new_soldier(direction, current_player);
+}
+
+function call_new_tank(){
+	if(current_player == 1){
+		var direction = 'ltr';
+	} else {
+		var direction = 'rtf';
+	}
+	new_tank(direction, current_player);
+}
+
 function change_health(base, change) {
 	if(base == 1) health_1 -= change;
 	if(base == 2) health_2 -= change;
