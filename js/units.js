@@ -1,18 +1,21 @@
 // unit
 var unit_walkingpath = get_unit_walkingpath();
 
-function new_unit(p_speed, p_damage, p_object, p_hp){
-	var speed = p_speed;
-	var damage = p_damage;
-	var figure = p_object;
-	var hp = p_hp;
+function new_unit(p_speed, p_udamage, p_object, p_hp, owner){
+	this.speed = p_speed;
+	this.udamage = p_udamage;
+	this.figure = p_object;
+	this.hp = p_hp;
+	this.owner = owner;
 
-	move_through_points(speed, figure, unit_walkingpath, bf_units, 0, hp);
+	console.log(hp);
+
+	move_through_points(speed, figure, unit_walkingpath, bf_units, 0, hp, owner);
 }
 
 function new_soldier(){
 	var type = 'soldier';
-	var damage = 20;
+	var udamage = 20;
 	var speed = 100;
 	var hp = 20;
 
@@ -28,11 +31,11 @@ function new_soldier(){
 
 	bf_units.add(figure);
 
-	var unit = new_unit(speed, damage, figure, hp);
+	var unit = new_unit(speed, udamage, figure, hp, current_player);
 }
 
 
-function move_through_points(speed, figure, point, layer, current, hp){
+function move_through_points(speed, figure, point, layer, current, hp, owner){
 		if(point.length <= current){
 			//console.log("movement done");
 			return;
@@ -44,7 +47,7 @@ function move_through_points(speed, figure, point, layer, current, hp){
 			var done = {x: false, y: false};
 
 			//console.log(point[current]);
-			hp = is_in_range(figure.getX(), figure.getY(), hp);
+			hp = is_in_range(figure.getX(), figure.getY(), hp, owner);
 			if(hp <= 0){
 				console.log("Unit killed!");
 				this.stop();
@@ -82,7 +85,7 @@ function move_through_points(speed, figure, point, layer, current, hp){
 
 			if(done.x == true && done.y == true){
 				this.stop();
-				move_through_points(speed, figure, point, layer, (current + 1), hp);
+				move_through_points(speed, figure, point, layer, (current + 1), hp, owner);
 			}
 		}, layer);
 

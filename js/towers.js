@@ -1,23 +1,47 @@
 // towers
 var tower_list = new Array();
+var tower_list_enemy = new Array();
 
 
-function new_tower(damage, cooldown, radius, figure, xcor, ycor){
+function new_tower(damage, cooldown, radius, figure, xcor, ycor, owner){
 	tower_list.forEach(function(entry){
-  	if(entry.xc == xcor && entry.yc == ycor){
-    	return;
-  	}
+		if(entry.xc == xcor && entry.yc == ycor){
+			alert('This place is taken!');
+			return;
+		}
 	});
 	
 	this.damage = damage;
 	this.cooldown = cooldown * 1000;
-	this.radius = radius  * grid_size;
+	this.radius = radius * grid_size;
 	this.figure = figure;
 	this.last_fired = 0;
 	this.xc = xcor;
 	this.yc = ycor;
+	this.owner = owner;
 
-	tower_list.push(this);
+	//console.log(damage);
+
+	if(owner == current_player){
+		tower_list.push(this);
+		//tower_list_enemy.push(this);
+	} else {
+		tower_list_enemy.push(this);
+	}
+
+	//console.log(xcor, ycor);
+	var rad = new Kinetic.Circle({
+		x: xcor,
+		y: ycor,
+		radius: radius*grid_size,
+		fill: 'blue',
+		opacity: 0.2,
+		stroke: 'black',
+		strokeWidth: 1
+	});
+
+	bf_towers.add(rad);
+	bf_towers.draw();
 }
 
 function new_mg_tower(xcor, ycor){
@@ -27,7 +51,7 @@ function new_mg_tower(xcor, ycor){
 	var type = 'mg';
 	var damage = 5;
 	var cooldown = 1;
-	var radius = 10;
+	var radius = 5;
 
 	var figure = new Kinetic.Circle({
 		x: xcor * grid_size - grid_size/2,
@@ -41,17 +65,25 @@ function new_mg_tower(xcor, ycor){
 	bf_towers.add(figure);
 	bf_towers.draw();
 
-	var tower = new_tower(damage, cooldown, radius, figure, xcor, ycor);
+	var tower = new_tower(damage, cooldown, radius, figure, xcor * grid_size - grid_size/2, ycor * grid_size - grid_size/2, current_player);
 }
 
 
-function is_in_range(xcor, ycor, hp){
+function is_in_range(xcor, ycor, hp, owner){
 	//console.log('Is in range?'+xcor+ycor+hp);
+	if(owner == current_player){
+		var tlist = tower_list_enemy;
+	} else {
+		var tlist = tower_list;
+	}
 
 	var tcounter = 0;
+	//console.log('hp '+hp);
 	var unit_hp = hp;
 
-	tower_list.forEach(function(entry) {
+	tlist.forEach(function(entry) {
+		//console.log(entry.damage)
+		//console.log(entry.xc + ', ' + entry.yc);
 		var tmp_distance = Math.round(Math.sqrt(Math.pow(Math.abs(entry.xc - xcor), 2) + Math.pow(Math.abs(entry.yc - ycor), 2)));
 
 		//console.log(tmp_distance + ", "+entry.radius);
@@ -62,10 +94,11 @@ function is_in_range(xcor, ycor, hp){
 			//console.log((ts - entry.last_fired) + ", " + entry.cooldown)
 
 			if((ts - entry.last_fired) >= entry.cooldown){
-				//console.log(tower_list[tcounter].last_fired);
+				//console.log(tlist[tcounter].last_fired);
+				//console.log('uhp: '+unit_hp+', '+entry.damage);
 				unit_hp = unit_hp - entry.damage;
-				tower_list[tcounter].last_fired = ts;
-				console.log("Shoot them down!!! :D "+unit_hp);
+				tlist[tcounter].last_fired = ts;
+				//console.log("Shoot them down!!! :D "+unit_hp);
 			}
 		}
 

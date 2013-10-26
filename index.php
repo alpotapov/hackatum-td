@@ -12,6 +12,10 @@
 	<script type="text/javascript" src="js/towers.js"></script>
 	<script type="text/javascript" src="js/units.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript">
+		var current_player = 1;
+		var enemy_player = 2;
+	</script>
 </head>
 <body>
 	<div id="battlefield">
