@@ -1,6 +1,6 @@
 // engine.js
 var stage_width = 1000;
-var stage_height = 600;
+var stage_height = 480;
 var grid_size = 40;
 
 function init_game(){
@@ -13,18 +13,28 @@ function init_game(){
 	var bf_background = new Kinetic.Layer();
 	init_grid(bf_background);
 
-	var rect = new Kinetic.Rect({
-		x: 239,
-		y: 75,
-		width: 100,
-		height: 50,
+	var castle_1 = new Kinetic.Rect({
+		x: grid_size*1,
+		y: grid_size*6,
+		width: grid_size*2,
+		height: grid_size*3,
+		fill: 'blue',
+		stroke: 'black',
+		strokeWidth: 1
+	});
+	bf_background.add(castle_1);
+
+	var castle_2 = new Kinetic.Rect({
+		x: grid_size*22,
+		y: grid_size*6,
+		width: grid_size*2,
+		height: grid_size*3,
 		fill: 'green',
 		stroke: 'black',
-		strokeWidth: 4
+		strokeWidth: 1
 	});
+	bf_background.add(castle_2);
 
-	// add the shape to the layer
-	bf_background.add(rect);
 
 	// add the layer to the stage
 	stage.add(bf_background);
@@ -38,7 +48,7 @@ function init_grid(layer){
 	console.log(counter_horizontal);
 
 	counter = 0;
-	while (counter < counter_vertical){
+	while (counter <= counter_vertical){
 		var line = new Kinetic.Line({
 			points: [0, counter*grid_size, stage_width, counter*grid_size],
 			stroke: 'black',
@@ -51,7 +61,7 @@ function init_grid(layer){
 	}
 
 	counter = 0;
-	while (counter < counter_horizontal){
+	while (counter <= counter_horizontal){
 		var line = new Kinetic.Line({
 			points: [counter*grid_size, 0, counter*grid_size, stage_height],
 			stroke: 'black',
