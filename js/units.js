@@ -27,10 +27,10 @@ function new_soldier(direction, owner){
 	var speed = 100;
 	var hp = 20;
 	
-	var cost = 20;
+	var cost = 10;
 	if(!account_subtract(owner, cost)){
-  	console.log("not enough CASH!");
-  	return;
+		console.log("not enough CASH!");
+		return;
 	}
 	
 	console.log("funds available: " + account_get(owner));
@@ -72,6 +72,12 @@ function new_tank(direction, owner){
 	var udamage = 10;
 	var speed = 60;
 	var hp = 40;
+
+	var cost = 30;
+	if(!account_subtract(owner, cost)){
+		console.log("not enough CASH!");
+		return;
+	}
 	
 	var starting_point = new Array();
 	
@@ -128,7 +134,7 @@ function move_through_points(speed, figure, point, layer, current, hp, owner, ud
 				}else{
   				var give_to = 1
 				}
-				account_add(give_to, 50);
+				account_add(give_to, 20);
 				this.stop();
 				figure.remove();
 				bf_units.draw();

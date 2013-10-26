@@ -17,12 +17,15 @@ function account_add(player, change){
   }
   
   console.log("Player " + player + " gets " + change + "$");
+
+  update_cash();
 }
 
 function account_subtract(player, change){
   if(player == 1){
     if(account_p1 - change >= 0){
       account_p1 -= change;
+      update_cash();
       return true;
     }else{
       return false;
@@ -30,9 +33,14 @@ function account_subtract(player, change){
   }else{
     if(account_p2 - change >= 0){
       account_p2 -= change;
+      update_cash();
       return true;
     }else{
       return false;
     }
   }
+}
+
+function update_cash(){
+  
 }
