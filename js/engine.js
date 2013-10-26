@@ -301,7 +301,11 @@ function change_health(base, change) {
 }
 
 function update_health(){
-	eval("$('#health_box').html(health_"+current_player+");");
+	if(current_player == 1){
+		$('#health_box').html(health_1);
+	}else{
+		$('#health_box').html(health_2);
+	}
 }
 
 function gameover_alert(player){
