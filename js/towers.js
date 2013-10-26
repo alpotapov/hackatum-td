@@ -3,11 +3,17 @@ var tower_list = new Array();
 
 
 function new_tower(damage, cooldown, radius, figure, xcor, ycor){
+	occupied = false;
 	tower_list.forEach(function(entry){
   	if(entry.xc == xcor && entry.yc == ycor){
-    	return;
+    	console.log("occupied...");
+    	occupied = true;
   	}
 	});
+	
+	if(occupied){
+  	return;
+	}
 	
 	this.damage = damage;
 	this.cooldown = cooldown * 1000;
@@ -16,7 +22,7 @@ function new_tower(damage, cooldown, radius, figure, xcor, ycor){
 	this.last_fired = 0;
 	this.xc = xcor;
 	this.yc = ycor;
-
+  console.log("added...");
 	tower_list.push(this);
 }
 
