@@ -47,15 +47,16 @@ function new_soldier(direction, owner){
 		stroke: 'black',
 		strokeWidth: 1
 	*/
-	var img = new Image(40, 40);
+	var imgsoldier = new Image(40, 40);
 	var rnd = 1 + Math.floor(Math.random() * 3);
-	img.src = "res/tank" + rnd + ".png";
+	imgsoldier.src = "res/tank" + rnd + ".png";
+	console.log(imgsoldier.src);
 	var figure = new Kinetic.Rect({
-		x: starting_point[0]*grid_size,
-		y: starting_point[1]*grid_size,
+		x: starting_point[0],
+		y: starting_point[1],
 		width: 40,
 		height: 40,
-		fillPatternImage: img
+		fillPatternImage: imgsoldier
 	});
 
 	bf_units.add(figure);

@@ -29,7 +29,7 @@
 		}
 
 		if($_GET['socket'] == 1){
-			echo '$(document).ready(function(){ init_game(); });';
+			echo '$(document).ready(function(){ init_socket(); });';
 		}
 		?>
 	</script>
