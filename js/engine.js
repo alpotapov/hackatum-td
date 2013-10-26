@@ -9,7 +9,7 @@ var stage;
 var bf_background;
 var bf_towers;
 var bf_units;
-
+var bf_highlights;
 
 function init_game(){
 	stage = new Kinetic.Stage({
@@ -21,45 +21,62 @@ function init_game(){
 	bf_background = new Kinetic.Layer();
 	bf_towers = new Kinetic.Layer();
 	bf_units = new Kinetic.Layer();
+	bf_highlights = new Kinetic.Layer();
+	
+	$('#battlefield').on('click', function(evt) {
+		var pos = get_cursor(evt);
+		highlight(pos, true);
+	});
+	
+	$('#battlefield').on('mousemove', function(evt) {
+		var pos = get_cursor(evt);
+		highlight(pos, false);
+	});
+
 	init_grid(bf_background);
 	init_street(bf_background);
-
-	var castle_1 = new Kinetic.Rect({
-		x: grid_size*1,
-		y: grid_size*4,
-		width: grid_size*2,
-		height: grid_size*4,
-		fill: 'blue',
-		stroke: 'black',
-		strokeWidth: 1
-	});
-	bf_background.add(castle_1);
-
-	var castle_2 = new Kinetic.Rect({
-		x: grid_size*22,
-		y: grid_size*4,
-		width: grid_size*2,
-		height: grid_size*4,
-		fill: 'green',
-		stroke: 'black',
-		strokeWidth: 1
-	});
-
-	bf_background.add(castle_2);
+	init_castles();
 
 	// add the layer to the stage
 	stage.add(bf_background);
 	stage.add(bf_towers);
 	stage.add(bf_units);
+	stage.add(bf_highlights);
+}
+
+function init_castles() {
+	var c1_img = new Image(80, 120);
+	c1_img.src = "res/base1.png";
+	var castle_1 = new Kinetic.Rect({
+		x: grid_size*1,
+		y: grid_size*5,
+		width: grid_size*2,
+		height: grid_size*3,
+		fillPatternImage: c1_img,
+		// fill: 'blue',
+		stroke: 'black',
+		strokeWidth: 1
+	});
+	bf_background.add(castle_1);
+
+
+	var c2_img = new Image(80, 120);
+	c2_img.src = "res/base2.png";
+	var castle_2 = new Kinetic.Rect({
+		x: grid_size*22,
+		y: grid_size*5,
+		width: grid_size*2,
+		height: grid_size*3,
+		fillPatternImage: c2_img,
+		//fill: 'green',
+		stroke: 'black',
+		strokeWidth: 1
+	});
+	bf_background.add(castle_2);
 }
 
 
 function init_grid(layer){
-	$('#battlefield').on('click', function(evt){
-		pos = get_cursor(evt);
-		//what to do?
-	});
-
 	counter_horizontal = stage_width/grid_size;
 	counter_vertical = stage_height/grid_size;
 
@@ -115,7 +132,6 @@ function init_street(layer){
 	layer.add(street);
 }
 
-
 function init_walkingpath(){
 	var wp = new Array();
 	wp[0] = new Array(3, 6);
@@ -128,13 +144,69 @@ function init_walkingpath(){
 	return wp;
 }
 
-
 function get_cursor(e){
 	var $div = $("#battlefield");
 	divPos = {
-		left: e.pageX - $div.offset().left,
-		top: e.pageY - $div.offset().top
+		x: e.pageX - $div.offset().left,
+		y: e.pageY - $div.offset().top
 	};
 
 	return divPos;
+}
+
+
+var click_highlight = new Kinetic.Rect({
+	x: 0,
+	y: 0,
+	width: grid_size,
+	height: grid_size,
+	fill: 'rgb(122, 122, 122)',
+	opacity: 0.3,
+});
+
+var click_outline = new Kinetic.Rect({
+	x: 0,
+	y: 0,
+	width: grid_size - 2,
+	height: grid_size - 2,
+	stroke: 'black',
+	strokeWidth: 3
+});
+
+var o_highlight = new Kinetic.Rect({
+	x: 0,
+	y: 0,
+	width: grid_size,
+	height: grid_size,
+	fill: 'rgb(122, 122, 122)',
+	opacity: 0.3,
+	stroke: 'black',
+	strokeWidth: 1
+});
+
+function highlight(pos, click) {
+	var gridX = Math.floor(pos.x / grid_size) * grid_size;
+	var gridY = Math.floor(pos.y / grid_size) * grid_size;
+
+	o_highlight.remove();
+	if(click) {
+		click_highlight.remove();
+		click_outline.remove();
+		click_highlight.setX(gridX);
+		click_highlight.setY(gridY);
+		click_outline.setX(gridX + 1);
+		click_outline.setY(gridY + 1);
+		
+		bf_highlights.add(click_highlight);
+		bf_highlights.add(click_outline);
+	} else {
+		o_highlight.setX(gridX);
+		o_highlight.setY(gridY);
+		bf_highlights.add(o_highlight);
+	}
+	bf_highlights.draw();
+}
+
+function call_new_mg_tower(){
+  create_mg_tower(click_highlight.getX() / grid_size, click_highlight.getY() / grid_size);
 }
