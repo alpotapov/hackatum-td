@@ -22,8 +22,8 @@ function init_socket(){
 	};
 }
 
-function socket_send(){
-	socket.send(new_response(jm, apelli_id));
+function socket_send(msg){
+	socket.send(msg);
 }
 
 
