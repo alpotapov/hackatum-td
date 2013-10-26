@@ -91,7 +91,7 @@ wsServer.on('request', function (request) {
 	}
 	*/
 
-	connected[id_runner] = new connected_client(id_runner, accepted_protocols[protocol], request, offered_protocol[1]);
+	connected[id_runner] = new connected_client(id_runner, request);
 	id_runner++;
 });
 
